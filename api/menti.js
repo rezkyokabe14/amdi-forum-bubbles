@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
   if (!s) return res.status(400).json({ error: 'unknown-slide' });
   try {
     const [r1, r2] = await Promise.all([
-      fetch(BASE + s.ic + '/text-results', { headers: H }),
+      fetch(BASE + s.ic + (s.type === 'word-cloud' ? '/text-results' : '/text-responses'), { headers: H }),
       fetch(BASE + s.ic + '/participant-count', { headers: H }),
     ]);
     if (!r1.ok) throw new Error('menti ' + r1.status);
