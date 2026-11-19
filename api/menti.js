@@ -12,7 +12,7 @@ const H = { Accept: 'application/json', 'User-Agent': 'Mozilla/5.0 (amdi-forum-b
 function pickText(o) {
   if (typeof o === 'string') return o;
   if (!o || typeof o !== 'object') return '';
-  for (const k of ['text', 'word', 'value', 'answer', 'label', 'title', 'response']) {
+  for (const k of ['response_text', 'text', 'word', 'value', 'answer', 'label', 'title', 'response']) {
     if (typeof o[k] === 'string' && o[k].trim()) return o[k];
   }
   for (const v of Object.values(o)) if (typeof v === 'string' && v.trim() && !/^[0-9a-f-]{20,}$/i.test(v)) return v;
@@ -20,7 +20,7 @@ function pickText(o) {
 }
 function pickCount(o) {
   if (!o || typeof o !== 'object') return 1;
-  for (const k of ['count', 'score', 'occurrences', 'votes', 'amount']) if (typeof o[k] === 'number') return o[k];
+  for (const k of ['response_count', 'count', 'score', 'occurrences', 'votes', 'amount']) if (typeof o[k] === 'number') return o[k];
   return 1;
 }
 function normalise(j) {
